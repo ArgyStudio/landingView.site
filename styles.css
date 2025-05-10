@@ -98,10 +98,28 @@ body {
   animation: bounce 2.5s infinite var(--ease);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
-
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+/* Subtitles: enable, shadow & fire flicker */
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+}
+.subtitle .fire {
+  animation: flicker 2s infinite var(--ease);
+}
+@keyframes flicker {
+  0%,20%,22%,63%,65%,100% { opacity: 1; }
+  21%,64%                 { opacity: 0.4; }
 }
 
 .title {
@@ -109,13 +127,9 @@ body {
   font-weight: 800;
   color: var(--accent-light);
   text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.7),
+    2px 2px 4px rgba(0,0,0,0.7),
     0    0    8px var(--accent-mid);
   text-align: center;
-}
-
-.subtitle {
-  display: none; /* removed extra subtitle */
 }
 
 .highlight {
@@ -156,11 +170,10 @@ input[type="text"]:focus {
 .shake {
   animation: shake 0.5s var(--ease);
 }
-
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-6px); }
-  40%, 80% { transform: translateX(6px); }
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-6px); }
+  40%,80% { transform: translateX(6px); }
 }
 
 .btn {
@@ -179,17 +192,14 @@ input[type="text"]:focus {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   transition: transform var(--fast) var(--ease);
 }
-
 @keyframes gradient {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .btn:hover {
   transform: scale(1.03) translateY(-1px);
 }
-
 .btn .icon {
   margin-left: 0.5rem;
   width: 1.25em;
@@ -198,16 +208,18 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
-6. Carousel (auto-scroll & centering)
+6. Carousel (auto-scroll, grab & pause)
 ------------------------------------*/
 .carousel-section {
   width: 100%;
   margin-top: var(--gutter);
   text-align: center;
 }
-
 .carousel-section h2 {
-  display: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  margin-bottom: 0.5rem;
 }
 
 .carousel {
@@ -223,7 +235,6 @@ input[type="text"]:focus {
   user-select: none;
   animation: scrollCarousel 20s linear infinite;
 }
-
 .carousel-track:active {
   cursor: grabbing;
   animation-play-state: paused;
@@ -242,13 +253,12 @@ input[type="text"]:focus {
 .skeleton {
   position: absolute;
   inset: 0;
-  background: rgba(224, 247, 255, 0.1);
+  background: rgba(224,247,255,0.1);
   animation: pulse 1.5s ease-in-out infinite;
 }
-
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.4; }
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.4; }
 }
 
 .carousel-item img {
@@ -267,67 +277,24 @@ input[type="text"]:focus {
 .dot {
   width: 0.6rem;
   height: 0.6rem;
-  background: rgba(224, 247, 255, 0.5);
+  background: rgba(224,247,255,0.5);
   border-radius: 50%;
   border: none;
   transition: background var(--fast) var(--ease);
 }
-
 .dot.active {
   background: var(--accent-light);
 }
 
 /*------------------------------------
-7. Testimonials
+7. Testimonials Header
 ------------------------------------*/
-.testimonials-section {
-  background: rgba(0, 36, 72, 0.85);
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  margin-top: var(--gutter);
-  text-align: center;
-}
-
 .testimonials-section h2 {
-  display: none;
-}
-
-.testimonials-carousel {
-  position: relative;
-  height: auto;
-  overflow: visible;
-}
-
-.testimonial-item {
-  position: absolute;
-  width: 100%;
-  top: 100%;
-  left: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  background: rgba(224, 247, 255, 0.05);
-  padding: 1rem;
-  border-radius: calc(var(--radius) / 2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition:
-    opacity var(--fast) var(--ease),
-    transform var(--fast) var(--ease),
-    top var(--fast) var(--ease);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  color: var(--white);
-}
-
-.testimonial-item.active {
-  top: 0;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.testimonial-item .meta {
-  font-size: 0.75rem;
-  color: rgba(224, 247, 255, 0.7);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 /*------------------------------------
