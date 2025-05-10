@@ -19,11 +19,11 @@
   --radius: 1rem;
 
   /* Timing */
-  --ease: cubic-bezier(0.4,0,0.2,1);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --fast: 0.2s;
   --medium: 0.5s;
 
-  /* Aspect ratio sólo para la .screen */
+  /* Screen aspect ratio */
   --screen-aspect: 360/780;
 }
 
@@ -52,15 +52,10 @@ body {
   color: var(--white);
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Ocultar por completo todo el mockup */
-.phone-container,
-.phone-mockup {
-  display: none !important;
-}
-
-/* Ocultar toggle de tema y texto sobrante */
+/* Hide theme toggle button and extra content */
 .theme-toggle,
 .light-toggle,
 .content-to-hide {
@@ -68,17 +63,17 @@ body {
 }
 
 /*------------------------------------
-3. Screen ÚNICA (sin mockup)
+3. Screen Container
 ------------------------------------*/
 .screen {
   position: relative;
   width: 100%;
-  max-width: 480px;              /* límite razonable en desktop */
-  margin: 2rem auto;             /* centrado con espacio arriba/abajo */
+  max-width: 480px;      /* max width on desktop */
+  margin: 2rem auto;     /* center vertically & horizontally */
   background: var(--bg-light);
   border-radius: var(--radius);
   padding: var(--gutter);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   aspect-ratio: var(--screen-aspect);
   overflow: hidden;
 }
@@ -88,7 +83,7 @@ body {
 ------------------------------------*/
 .card {
   width: 100%;
-  background: linear-gradient(180deg, rgba(0,30,60,0.9), rgba(0,58,107,0.8));
+  background: linear-gradient(180deg, rgba(0, 30, 60, 0.9), rgba(0, 58, 107, 0.8));
   backdrop-filter: blur(8px);
   border-radius: var(--radius);
   display: flex;
@@ -101,12 +96,12 @@ body {
 .emoji {
   font-size: 2.5rem;
   animation: bounce 2.5s infinite var(--ease);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 @keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 .title {
@@ -114,20 +109,20 @@ body {
   font-weight: 800;
   color: var(--accent-light);
   text-shadow:
-    2px 2px 4px rgba(0,0,0,0.7),
+    2px 2px 4px rgba(0, 0, 0, 0.7),
     0    0    8px var(--accent-mid);
   text-align: center;
 }
 
 .subtitle {
-  display: none; /* eliminado "Por qué Mega Cash…" */
+  display: none; /* removed extra subtitle */
 }
 
 .highlight {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--accent-light);
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   margin-top: 0.5rem;
 }
 
@@ -143,7 +138,7 @@ input[type="text"] {
   width: 100%;
   padding: 0.75rem;
   border: none;
-  border-radius: calc(var(--radius)/2);
+  border-radius: calc(var(--radius) / 2);
   background: var(--input-bg);
   color: var(--white);
   font-size: 1rem;
@@ -163,9 +158,9 @@ input[type="text"]:focus {
 }
 
 @keyframes shake {
-  0%,100% { transform: translateX(0); }
-  20%,60% { transform: translateX(-6px); }
-  40%,80% { transform: translateX(6px); }
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
 }
 
 .btn {
@@ -177,11 +172,11 @@ input[type="text"]:focus {
   font-weight: 600;
   color: var(--white);
   border: none;
-  border-radius: calc(var(--radius)/2);
+  border-radius: calc(var(--radius) / 2);
   background: linear-gradient(90deg, var(--accent-mid), var(--accent-light));
   background-size: 200% 200%;
   animation: gradient 4s var(--ease) infinite;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   transition: transform var(--fast) var(--ease);
 }
 
@@ -199,11 +194,11 @@ input[type="text"]:focus {
   margin-left: 0.5rem;
   width: 1.25em;
   height: 1.25em;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /*------------------------------------
-6. Carousel (auto-scroll & centrado)
+6. Carousel (auto-scroll & centering)
 ------------------------------------*/
 .carousel-section {
   width: 100%;
@@ -247,18 +242,18 @@ input[type="text"]:focus {
 .skeleton {
   position: absolute;
   inset: 0;
-  background: rgba(224,247,255,0.1);
+  background: rgba(224, 247, 255, 0.1);
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%,100% { opacity: 1; }
-  50%     { opacity: 0.4; }
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
 }
 
 .carousel-item img {
   width: 100%;
-  border-radius: calc(var(--radius)/1.3);
+  border-radius: calc(var(--radius) / 1.3);
   object-fit: cover;
 }
 
@@ -272,7 +267,7 @@ input[type="text"]:focus {
 .dot {
   width: 0.6rem;
   height: 0.6rem;
-  background: rgba(224,247,255,0.5);
+  background: rgba(224, 247, 255, 0.5);
   border-radius: 50%;
   border: none;
   transition: background var(--fast) var(--ease);
@@ -286,7 +281,7 @@ input[type="text"]:focus {
 7. Testimonials
 ------------------------------------*/
 .testimonials-section {
-  background: rgba(0,36,72,0.85);
+  background: rgba(0, 36, 72, 0.85);
   padding: 1.5rem;
   border-radius: var(--radius);
   margin-top: var(--gutter);
@@ -310,10 +305,10 @@ input[type="text"]:focus {
   left: 0;
   opacity: 0;
   transform: translateY(20px);
-  background: rgba(224,247,255,0.05);
+  background: rgba(224, 247, 255, 0.05);
   padding: 1rem;
-  border-radius: calc(var(--radius)/2);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  border-radius: calc(var(--radius) / 2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition:
     opacity var(--fast) var(--ease),
     transform var(--fast) var(--ease),
@@ -332,7 +327,7 @@ input[type="text"]:focus {
 
 .testimonial-item .meta {
   font-size: 0.75rem;
-  color: rgba(224,247,255,0.7);
+  color: rgba(224, 247, 255, 0.7);
 }
 
 /*------------------------------------
@@ -344,3 +339,4 @@ input[type="text"]:focus {
     transition: none !important;
   }
 }
+
