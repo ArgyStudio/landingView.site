@@ -23,10 +23,8 @@
   --fast: 0.2s;
   --medium: 0.5s;
 
-  /* Phone aspect ratio control (for mockup removal, used for aspect-ratio) */
-  --phone-aspect: 360/780;
-  --phone-width: 90vw;
-  --phone-height: calc(var(--phone-width) / var(--phone-aspect));
+  /* Aspect ratio sólo para la .screen */
+  --screen-aspect: 360/780;
 }
 
 /*------------------------------------
@@ -50,14 +48,19 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
   background: var(--bg-dark);
   color: var(--white);
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 
-/* Hide theme-toggle button and any extra content */
+/* Ocultar por completo todo el mockup */
+.phone-container,
+.phone-mockup {
+  display: none !important;
+}
+
+/* Ocultar toggle de tema y texto sobrante */
 .theme-toggle,
 .light-toggle,
 .content-to-hide {
@@ -65,21 +68,19 @@ body {
 }
 
 /*------------------------------------
-3. Screen (Mockup removed)
+3. Screen ÚNICA (sin mockup)
 ------------------------------------*/
 .screen {
   position: relative;
   width: 100%;
-  max-width: var(--phone-width);
-  margin: 0 auto;
+  max-width: 480px;              /* límite razonable en desktop */
+  margin: 2rem auto;             /* centrado con espacio arriba/abajo */
   background: var(--bg-light);
   border-radius: var(--radius);
   padding: var(--gutter);
-  overflow: visible;
-  pointer-events: auto;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-  /* Optionally preserve aspect ratio */
-  aspect-ratio: var(--phone-aspect);
+  aspect-ratio: var(--screen-aspect);
+  overflow: hidden;
 }
 
 /*------------------------------------
@@ -202,7 +203,7 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
-6. Carousel (auto-scroll & centering)
+6. Carousel (auto-scroll & centrado)
 ------------------------------------*/
 .carousel-section {
   width: 100%;
@@ -211,7 +212,7 @@ input[type="text"]:focus {
 }
 
 .carousel-section h2 {
-  display: none; /* quitamos el título si sobra */
+  display: none;
 }
 
 .carousel {
@@ -293,7 +294,7 @@ input[type="text"]:focus {
 }
 
 .testimonials-section h2 {
-  display: none; /* oculto si no hace falta */
+  display: none;
 }
 
 .testimonials-carousel {
@@ -335,21 +336,7 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
-8. Responsive tweaks
-------------------------------------*/
-@media (max-width: 600px) {
-  .screen {
-    border-radius: 0;
-    padding: var(--gutter);
-    box-shadow: none;
-    width: 100%;
-    max-width: none;
-    aspect-ratio: var(--phone-aspect);
-  }
-}
-
-/*------------------------------------
-9. Reduced motion
+8. Reduced motion
 ------------------------------------*/
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
