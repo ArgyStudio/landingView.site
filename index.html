@@ -3,9 +3,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>Mega Cash – Crea tu usuario</title>
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
     rel="stylesheet"
@@ -14,7 +17,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Aquí va el mockup del teléfono -->
+  <!-- Mockup del teléfono -->
   <div class="phone-container">
     <img
       src="images/iphone-mockup.png"
@@ -22,7 +25,7 @@
       class="phone-mockup"
     />
 
-    <!-- Zona visible de la pantalla -->
+    <!-- Zona visible dentro del mockup -->
     <div class="screen">
       <!-- Tarjeta principal -->
       <div class="card">
@@ -54,13 +57,20 @@
           <button class="nav prev">‹</button>
           <div class="carousel-track-container">
             <ul class="carousel-track">
-              <!-- 14 items: slide1.jpg … slide14.jpg -->
-              <!-- Ajusta los nombres si los has numerado distinto -->
-              ${[...Array(14)].map((_, i) => `
-                <li class="carousel-item">
-                  <img src="images/slide${i+1}.jpg" alt="Slide ${i+1}" />
-                </li>
-              `).join('')}
+              <li class="carousel-item"><img src="images/slide1.jpg" alt="Slide 1" /></li>
+              <li class="carousel-item"><img src="images/slide2.jpg" alt="Slide 2" /></li>
+              <li class="carousel-item"><img src="images/slide3.jpg" alt="Slide 3" /></li>
+              <li class="carousel-item"><img src="images/slide4.jpg" alt="Slide 4" /></li>
+              <li class="carousel-item"><img src="images/slide5.jpg" alt="Slide 5" /></li>
+              <li class="carousel-item"><img src="images/slide6.jpg" alt="Slide 6" /></li>
+              <li class="carousel-item"><img src="images/slide7.jpg" alt="Slide 7" /></li>
+              <li class="carousel-item"><img src="images/slide8.jpg" alt="Slide 8" /></li>
+              <li class="carousel-item"><img src="images/slide9.jpg" alt="Slide 9" /></li>
+              <li class="carousel-item"><img src="images/slide10.jpg" alt="Slide 10" /></li>
+              <li class="carousel-item"><img src="images/slide11.jpg" alt="Slide 11" /></li>
+              <li class="carousel-item"><img src="images/slide12.jpg" alt="Slide 12" /></li>
+              <li class="carousel-item"><img src="images/slide13.jpg" alt="Slide 13" /></li>
+              <li class="carousel-item"><img src="images/slide14.jpg" alt="Slide 14" /></li>
             </ul>
           </div>
           <button class="nav next">›</button>
@@ -69,53 +79,61 @@
     </div>
   </div>
 
-  <!-- Contenido adicional (se ve en móvil, en desktop queda bajo el mockup) -->
+  <!-- Contenido adicional (visible en móvil) -->
   <main class="content">
     <section class="info">
       <h2>¿Por qué Mega Cash?</h2>
-      <p>Aquí puedes describir beneficios, características y testimonios.</p>
+      <p>
+        Aquí puedes describir beneficios, características y testimonios de tu
+        servicio. Agrega llamados a la acción o testimonios reales para ganar
+        confianza.
+      </p>
     </section>
   </main>
 
-  <!-- JS (solo para redirección) -->
+  <!-- Scripts: WhatsApp + Controles del carrusel -->
   <script>
-    // Redirección WhatsApp
+    // Redirección a WhatsApp con nombre
     document.getElementById('ctaButton').addEventListener('click', function (e) {
       e.preventDefault();
       const name = document.getElementById('username').value.trim();
-      if (name) {
-        const url = \`https://wa.me/54911XXXXXXXX?text=Hola%20soy%20\${encodeURIComponent(
-          name
-        )}\`;
-        window.location.href = url;
-      } else {
+      if (!name) {
         const inp = document.getElementById('username');
         inp.classList.add('shake');
         setTimeout(() => inp.classList.remove('shake'), 500);
+        return;
       }
+      const url = `https://wa.me/54911XXXXXXXX?text=Hola%20soy%20${encodeURIComponent(
+        name
+      )}`;
+      window.location.href = url;
     });
 
-    // Controles manuales del carrusel
-    const track = document.querySelector('.carousel-track');
-    const prev = document.querySelector('.prev');
-    const next = document.querySelector('.next');
-    const items = Array.from(track.children);
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    let idx = 0;
-    function updateCarousel() {
-      const itemWidth = items[0].getBoundingClientRect().width + gap;
-      track.style.transform = \`translateX(-\${itemWidth * idx}px)\`;
-    }
-    next.addEventListener('click', () => {
-      if (idx < items.length - 5) idx++;
-      updateCarousel();
-    });
-    prev.addEventListener('click', () => {
-      if (idx > 0) idx--;
-      updateCarousel();
-    });
-    // Ajustar al redimensionar
-    window.addEventListener('resize', updateCarousel);
+    // Lógica de navegación manual del carrusel
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      const items = Array.from(track.children);
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      let idx = 0;
+
+      function update() {
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const itemW = items[0].getBoundingClientRect().width + gap;
+        track.style.transform = `translateX(-${itemW * idx}px)`;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (idx < items.length - 5) idx++;
+        update();
+      });
+      prevBtn.addEventListener('click', () => {
+        if (idx > 0) idx--;
+        update();
+      });
+      window.addEventListener('resize', update);
+    })();
   </script>
 </body>
 </html>
+
