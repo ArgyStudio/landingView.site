@@ -1,36 +1,43 @@
-<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Mega Cash – Crea tu usuario</title>
   <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
     rel="stylesheet"
   />
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Mockup del teléfono -->
-  <div class="phone-container">
-    <img
-      src="images/iphone-mockup.png"
-      alt="iPhone mockup"
-      class="phone-mockup"
-    />
+  <!-- Preloader Overlay -->
+  <div id="preloader">
+    <lottie-player
+      src="videos/slot-machine.json"
+      background="transparent"
+      speed="1"
+      style="width:150px; height:150px;"
+      autoplay
+      loop
+    ></lottie-player>
+  </div>
 
-    <!-- Zona visible dentro del mockup -->
+  <!-- Theme Toggle -->
+  <button id="themeToggle" aria-label="Cambiar tema" class="theme-toggle">🌙</button>
+
+  <!-- Phone Mockup -->
+  <div class="phone-container">
+    <img src="images/iphone-mockup.png" alt="iPhone mockup" class="phone-mockup" />
     <div class="screen">
-      <!-- Tarjeta principal -->
+      <!-- Form Card -->
       <div class="card">
         <div class="emoji">🎰</div>
-        <h1 class="title">MEGA CASH</h1>
+        <h1 class="title">200% EXTRA EN TU CARGA</h1>
         <p class="subtitle">
           <span class="fire">🔥</span>
           ESCRIBÍ TU NOMBRE Y CREA TU USUARIO
@@ -38,102 +45,131 @@
         </p>
         <p class="highlight">RETIROS ILIMITADOS</p>
         <div class="input-group">
-          <input type="text" placeholder="TU NOMBRE" id="username" />
+          <input type="text" id="username" placeholder="INSTERTA TU NOMBRE" autocomplete="off" />
         </div>
         <a href="#" id="ctaButton" class="btn">
           ¡CREA TU USUARIO!
-          <img
-            src="images/whatsapp-icon.svg"
-            alt="WhatsApp"
-            class="icon"
-          />
+          <img src="images/whatsapp-icon.svg" alt="WhatsApp icon" class="icon" />
         </a>
       </div>
 
-      <!-- Carrusel de 14 imágenes -->
+      <!-- Carousel Section -->
       <section class="carousel-section">
         <h2>Galería de Juegos</h2>
         <div class="carousel">
-          <button class="nav prev">‹</button>
-          <div class="carousel-track-container">
-            <ul class="carousel-track">
-              <li class="carousel-item"><img src="images/slide1.jpg" alt="Slide 1" /></li>
-              <li class="carousel-item"><img src="images/slide2.jpg" alt="Slide 2" /></li>
-              <li class="carousel-item"><img src="images/slide3.jpg" alt="Slide 3" /></li>
-              <li class="carousel-item"><img src="images/slide4.jpg" alt="Slide 4" /></li>
-              <li class="carousel-item"><img src="images/slide5.jpg" alt="Slide 5" /></li>
-              <li class="carousel-item"><img src="images/slide6.jpg" alt="Slide 6" /></li>
-              <li class="carousel-item"><img src="images/slide7.jpg" alt="Slide 7" /></li>
-              <li class="carousel-item"><img src="images/slide8.jpg" alt="Slide 8" /></li>
-              <li class="carousel-item"><img src="images/slide9.jpg" alt="Slide 9" /></li>
-              <li class="carousel-item"><img src="images/slide10.jpg" alt="Slide 10" /></li>
-              <li class="carousel-item"><img src="images/slide11.jpg" alt="Slide 11" /></li>
-              <li class="carousel-item"><img src="images/slide12.jpg" alt="Slide 12" /></li>
-              <li class="carousel-item"><img src="images/slide13.jpg" alt="Slide 13" /></li>
-              <li class="carousel-item"><img src="images/slide14.jpg" alt="Slide 14" /></li>
-            </ul>
-          </div>
-          <button class="nav next">›</button>
+          <ul class="carousel-track" id="track">
+            <!-- 14 slides -->
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide1.jpg" class="lazy" alt="Slide 1" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide2.jpg" class="lazy" alt="Slide 2" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide3.jpg" class="lazy" alt="Slide 3" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide4.jpg" class="lazy" alt="Slide 4" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide5.jpg" class="lazy" alt="Slide 5" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide6.jpg" class="lazy" alt="Slide 6" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide7.jpg" class="lazy" alt="Slide 7" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide8.jpg" class="lazy" alt="Slide 8" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide9.jpg" class="lazy" alt="Slide 9" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide10.jpg" class="lazy" alt="Slide 10" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide11.jpg" class="lazy" alt="Slide 11" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide12.jpg" class="lazy" alt="Slide 12" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide13.jpg" class="lazy" alt="Slide 13" loading="lazy" /></li>
+            <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide14.jpg" class="lazy" alt="Slide 14" loading="lazy" /></li>
+          </ul>
+        </div>
+        <div class="dots" id="dots"></div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials-section">
+        <h2>Lo que dicen nuestros usuarios</h2>
+        <div class="testimonials-carousel" id="testimonialsCarousel">
+          <!-- testimonials-carousel.js inyecta los items aquí -->
         </div>
       </section>
     </div>
   </div>
 
-  <!-- Contenido adicional (visible en móvil) -->
+  <!-- Fallback Mobile Content -->
   <main class="content">
     <section class="info">
       <h2>¿Por qué Mega Cash?</h2>
-      <p>
-        Aquí puedes describir beneficios, características y testimonios de tu
-        servicio. Agrega llamados a la acción o testimonios reales para ganar
-        confianza.
-      </p>
+      <p>Con Mega Cash vivís la emoción de un casino en la palma de tu mano. Bono de bienvenida, retiros inmediatos y soporte 24/7.</p>
     </section>
   </main>
 
-  <!-- Scripts: WhatsApp + Controles del carrusel -->
+  <!-- Scripts -->
   <script>
-    // Redirección a WhatsApp con nombre
-    document.getElementById('ctaButton').addEventListener('click', function (e) {
-      e.preventDefault();
-      const name = document.getElementById('username').value.trim();
-      if (!name) {
-        const inp = document.getElementById('username');
-        inp.classList.add('shake');
-        setTimeout(() => inp.classList.remove('shake'), 500);
-        return;
-      }
-      const url = `https://wa.me/54911XXXXXXXX?text=Hola%20soy%20${encodeURIComponent(
-        name
-      )}`;
-      window.location.href = url;
-    });
+    (function(){
+      // Preloader
+      window.addEventListener('load', ()=>{
+        const pre = document.getElementById('preloader');
+        pre.style.opacity = 0;
+        setTimeout(()=> pre.remove(), 600);
+      });
 
-    // Lógica de navegación manual del carrusel
-    (function () {
-      const track = document.querySelector('.carousel-track');
+      // Theme Toggle
+      const toggle = document.getElementById('themeToggle');
+      toggle.addEventListener('click', ()=>{
+        document.documentElement.classList.toggle('light');
+        toggle.textContent = document.documentElement.classList.contains('light') ? '🌞' : '🌙';
+      });
+
+      // WhatsApp Redirect
+      document.getElementById('ctaButton').addEventListener('click', e=>{
+        e.preventDefault();
+        const name = document.getElementById('username').value.trim();
+        if(!name){
+          const inp = document.getElementById('username');
+          inp.classList.add('shake');
+          setTimeout(()=> inp.classList.remove('shake'), 500);
+          return;
+        }
+        location.href = `https://wa.me/54911XXXXXXXX?text=Hola%20soy%20${encodeURIComponent(name)}`;
+      });
+
+      // Lazy-load images
+      const lazyImgs = [];
+      document.querySelectorAll('.lazy').forEach(img=> lazyImgs.push(img));
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const img = e.target;
+            img.src = img.dataset.src;
+            img.onload = ()=> img.previousElementSibling.remove();
+            obs.unobserve(img);
+          }
+        });
+      }, {rootMargin:'50px'});
+      lazyImgs.forEach(img=> obs.observe(img));
+
+      // Carousel touch + dots
+      const track = document.getElementById('track');
       const items = Array.from(track.children);
-      const prevBtn = document.querySelector('.prev');
-      const nextBtn = document.querySelector('.next');
-      let idx = 0;
-
-      function update() {
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const itemW = items[0].getBoundingClientRect().width + gap;
-        track.style.transform = `translateX(-${itemW * idx}px)`;
+      const dots = document.getElementById('dots');
+      let current = 0;
+      items.forEach((_,i)=>{
+        const d = document.createElement('button');
+        d.className = 'dot' + (i===0?' active':'');
+        d.addEventListener('click', ()=> moveTo(i));
+        dots.appendChild(d);
+      });
+      function moveTo(i){
+        const w = items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
+        track.style.transform = `translateX(-${w*i}px)`;
+        dots.querySelector('.active').classList.remove('active');
+        dots.children[i].classList.add('active');
+        current = i;
       }
-
-      nextBtn.addEventListener('click', () => {
-        if (idx < items.length - 5) idx++;
-        update();
+      let startX=0;
+      track.addEventListener('touchstart',e=> startX=e.touches[0].pageX);
+      track.addEventListener('touchend',e=>{
+        const diff = startX - e.changedTouches[0].pageX;
+        if(Math.abs(diff)>50){
+          if(diff>0 && current < items.length-1) moveTo(current+1);
+          if(diff<0 && current > 0) moveTo(current-1);
+        }
       });
-      prevBtn.addEventListener('click', () => {
-        if (idx > 0) idx--;
-        update();
-      });
-      window.addEventListener('resize', update);
     })();
   </script>
+  <script src="testimonials-carousel.js"></script>
 </body>
 </html>
-
