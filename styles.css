@@ -1,8 +1,9 @@
 /* File: styles.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
 /*------------------------------------
- 1. Variables (Mobile-First)
+1. Variables (Mobile-First)
 ------------------------------------*/
 :root {
   /* Color Palette */
@@ -22,14 +23,14 @@
   --fast: 0.2s;
   --medium: 0.5s;
 
-  /* Phone aspect ratio control */
+  /* Phone aspect ratio control (for mockup removal, used for aspect-ratio) */
   --phone-aspect: 360/780;
   --phone-width: 90vw;
   --phone-height: calc(var(--phone-width) / var(--phone-aspect));
 }
 
 /*------------------------------------
- 2. Reset & Base
+2. Reset & Base
 ------------------------------------*/
 *,
 *::before,
@@ -56,7 +57,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Ocultar toggle de tema y cualquier texto sobrante */
+/* Hide theme-toggle button and any extra content */
 .theme-toggle,
 .light-toggle,
 .content-to-hide {
@@ -64,27 +65,8 @@ body {
 }
 
 /*------------------------------------
- 3. Phone Mockup & Screen
+3. Screen (Mockup removed)
 ------------------------------------*/
-.phone-container {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  width: var(--phone-width);
-  height: var(--phone-height);
-  transform: translateX(-50%);
-  pointer-events: none;
-  z-index: 100;
-}
-
-.phone-mockup {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .screen {
   position: relative;
   width: 100%;
@@ -96,10 +78,12 @@ body {
   overflow: visible;
   pointer-events: auto;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  /* Optionally preserve aspect ratio */
+  aspect-ratio: var(--phone-aspect);
 }
 
 /*------------------------------------
- 4. Card & Typography
+4. Card & Typography
 ------------------------------------*/
 .card {
   width: 100%;
@@ -147,7 +131,7 @@ body {
 }
 
 /*------------------------------------
- 5. Input & Button
+5. Input & Button
 ------------------------------------*/
 .input-group {
   width: 100%;
@@ -218,7 +202,7 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
- 6. Carousel (auto-scroll & centrado)
+6. Carousel (auto-scroll & centering)
 ------------------------------------*/
 .carousel-section {
   width: 100%;
@@ -298,7 +282,7 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
- 7. Testimonials
+7. Testimonials
 ------------------------------------*/
 .testimonials-section {
   background: rgba(0,36,72,0.85);
@@ -351,21 +335,21 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
- 8. Responsive tweaks
+8. Responsive tweaks
 ------------------------------------*/
 @media (max-width: 600px) {
-  .phone-container {
-    display: none; /* opcional: ocultar mockup en móvil real */
-  }
   .screen {
     border-radius: 0;
     padding: var(--gutter);
     box-shadow: none;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: var(--phone-aspect);
   }
 }
 
 /*------------------------------------
- 9. Reduced motion
+9. Reduced motion
 ------------------------------------*/
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
