@@ -2,49 +2,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mega Cash - Crea tu usuario</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Mega Cash – Crea tu usuario</title>
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <div class="card">
-      <div class="emoji">🎰</div>
-      <h1 class="title">MEGA CASH</h1>
-      <p class="subtitle">
-        <span class="fire">🔥</span>
-        ESCRIBÍ TU NOMBRE Y CREA TU USUARIO
-        <span class="fire">🔥</span>
-      </p>
-      <p class="highlight">RETIROS ILIMITADOS</p>
-      <div class="input-group">
-        <input type="text" placeholder="TU NOMBRE" id="username" />
+  <!-- Aquí va el mockup del teléfono -->
+  <div class="phone-container">
+    <img
+      src="images/iphone-mockup.png"
+      alt="iPhone mockup"
+      class="phone-mockup"
+    />
+
+    <!-- Zona visible de la pantalla -->
+    <div class="screen">
+      <!-- Tarjeta principal -->
+      <div class="card">
+        <div class="emoji">🎰</div>
+        <h1 class="title">MEGA CASH</h1>
+        <p class="subtitle">
+          <span class="fire">🔥</span>
+          ESCRIBÍ TU NOMBRE Y CREA TU USUARIO
+          <span class="fire">🔥</span>
+        </p>
+        <p class="highlight">RETIROS ILIMITADOS</p>
+        <div class="input-group">
+          <input type="text" placeholder="TU NOMBRE" id="username" />
+        </div>
+        <a href="#" id="ctaButton" class="btn">
+          ¡CREA TU USUARIO!
+          <img
+            src="images/whatsapp-icon.svg"
+            alt="WhatsApp"
+            class="icon"
+          />
+        </a>
       </div>
-      <a href="#" id="ctaButton" class="btn">
-        ¡CREA TU USUARIO! <img src="images/whatsapp-icon.svg" alt="WhatsApp" class="icon" />
-      </a>
+
+      <!-- Carrusel de 14 imágenes -->
+      <section class="carousel-section">
+        <h2>Galería de Juegos</h2>
+        <div class="carousel">
+          <button class="nav prev">‹</button>
+          <div class="carousel-track-container">
+            <ul class="carousel-track">
+              <!-- 14 items: slide1.jpg … slide14.jpg -->
+              <!-- Ajusta los nombres si los has numerado distinto -->
+              ${[...Array(14)].map((_, i) => `
+                <li class="carousel-item">
+                  <img src="images/slide${i+1}.jpg" alt="Slide ${i+1}" />
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+          <button class="nav next">›</button>
+        </div>
+      </section>
     </div>
   </div>
 
-  <!-- JS (solo para redirección posterior) -->
+  <!-- Contenido adicional (se ve en móvil, en desktop queda bajo el mockup) -->
+  <main class="content">
+    <section class="info">
+      <h2>¿Por qué Mega Cash?</h2>
+      <p>Aquí puedes describir beneficios, características y testimonios.</p>
+    </section>
+  </main>
+
+  <!-- JS (solo para redirección) -->
   <script>
-    document.getElementById('ctaButton').addEventListener('click', function(e) {
+    // Redirección WhatsApp
+    document.getElementById('ctaButton').addEventListener('click', function (e) {
       e.preventDefault();
       const name = document.getElementById('username').value.trim();
       if (name) {
-        // Redirigir a WhatsApp con el nombre como parámetro de texto
-        const url = `https://wa.me/54911XXXXXXXX?text=Hola%20soy%20${encodeURIComponent(name)}`;
+        const url = \`https://wa.me/54911XXXXXXXX?text=Hola%20soy%20\${encodeURIComponent(
+          name
+        )}\`;
         window.location.href = url;
       } else {
-        // agitar input si está vacío
-        document.getElementById('username').classList.add('shake');
-        setTimeout(() => document.getElementById('username').classList.remove('shake'), 500);
+        const inp = document.getElementById('username');
+        inp.classList.add('shake');
+        setTimeout(() => inp.classList.remove('shake'), 500);
       }
     });
+
+    // Controles manuales del carrusel
+    const track = document.querySelector('.carousel-track');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    const items = Array.from(track.children);
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    let idx = 0;
+    function updateCarousel() {
+      const itemWidth = items[0].getBoundingClientRect().width + gap;
+      track.style.transform = \`translateX(-\${itemWidth * idx}px)\`;
+    }
+    next.addEventListener('click', () => {
+      if (idx < items.length - 5) idx++;
+      updateCarousel();
+    });
+    prev.addEventListener('click', () => {
+      if (idx > 0) idx--;
+      updateCarousel();
+    });
+    // Ajustar al redimensionar
+    window.addEventListener('resize', updateCarousel);
   </script>
 </body>
 </html>
