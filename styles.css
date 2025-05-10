@@ -42,20 +42,25 @@
 html {
   font-family: 'Montserrat', sans-serif;
   background: var(--bg-dark) no-repeat center/cover;
-  /* para asegurar que en todos los navegadores móviles
-     el zoom inicial sea 100% y respete media queries */
   touch-action: manipulation;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 0;               /* eliminado el padding-top que rompía el scroll global */
+  padding: 0;
   overflow-x: hidden;
-  overflow-y: auto;         /* scroll de toda la página */
+  overflow-y: auto;
   background: var(--bg-dark);
   color: var(--white);
   -webkit-overflow-scrolling: touch;
+}
+
+/* Ocultar toggle de tema y cualquier texto sobrante */
+.theme-toggle,
+.light-toggle,
+.content-to-hide {
+  display: none !important;
 }
 
 /*------------------------------------
@@ -80,15 +85,15 @@ body {
   object-fit: contain;
 }
 
-/* .screen ahora fluye con el body en altura automática */
 .screen {
   position: relative;
   width: 100%;
-  height: auto;             /* auto para que el contenido crezca y el body haga scroll */
+  max-width: var(--phone-width);
+  margin: 0 auto;
   background: var(--bg-light);
   border-radius: var(--radius);
-  overflow: visible;        /* quitamos el overflow interno */
   padding: var(--gutter);
+  overflow: visible;
   pointer-events: auto;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
 }
@@ -115,8 +120,8 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
 }
 
 .title {
@@ -130,21 +135,7 @@ body {
 }
 
 .subtitle {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
-}
-
-.subtitle .fire {
-  animation: flicker 2s infinite var(--ease);
-}
-
-@keyframes flicker {
-  0%,20%,22%,63%,65%,100% { opacity: 1; }
-  21%,64%                  { opacity: 0.4; }
+  display: none; /* eliminado "Por qué Mega Cash…" */
 }
 
 .highlight {
@@ -227,12 +218,16 @@ input[type="text"]:focus {
 }
 
 /*------------------------------------
- 6. Carousel (5 visible items)
+ 6. Carousel (auto-scroll & centrado)
 ------------------------------------*/
 .carousel-section {
   width: 100%;
-  margin: var(--gutter) 0;
-  padding-bottom: var(--gutter);
+  margin-top: var(--gutter);
+  text-align: center;
+}
+
+.carousel-section h2 {
+  display: none; /* quitamos el título si sobra */
 }
 
 .carousel {
@@ -246,10 +241,34 @@ input[type="text"]:focus {
   cursor: grab;
   touch-action: pan-x;
   user-select: none;
+  animation: scrollCarousel 20s linear infinite;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+  animation-play-state: paused;
+}
+
+@keyframes scrollCarousel {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .carousel-item {
+  position: relative;
   flex: 0 0 calc((100% - (4 * 0.5rem)) / 5);
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: rgba(224,247,255,0.1);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.4; }
 }
 
 .carousel-item img {
@@ -258,28 +277,43 @@ input[type="text"]:focus {
   object-fit: cover;
 }
 
-.nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  padding: 0.2rem 0.6rem;
-  cursor: pointer;
-  z-index: 10;
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
 }
 
-.prev { left: 0.5rem; }
-.next { right: 0.5rem; }
+.dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  background: rgba(224,247,255,0.5);
+  border-radius: 50%;
+  border: none;
+  transition: background var(--fast) var(--ease);
+}
+
+.dot.active {
+  background: var(--accent-light);
+}
 
 /*------------------------------------
  7. Testimonials
 ------------------------------------*/
-#testimonialsCarousel {
+.testimonials-section {
+  background: rgba(0,36,72,0.85);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-top: var(--gutter);
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  display: none; /* oculto si no hace falta */
+}
+
+.testimonials-carousel {
   position: relative;
-  margin: var(--gutter) 0;
   height: auto;
   overflow: visible;
 }
@@ -321,16 +355,12 @@ input[type="text"]:focus {
 ------------------------------------*/
 @media (max-width: 600px) {
   .phone-container {
-    width: 100vw;
-    height: calc(100vw / var(--phone-aspect));
-    top: 0;
-    transform: none;
+    display: none; /* opcional: ocultar mockup en móvil real */
   }
   .screen {
-    top: 5%;
-    left: 2.5%;
-    width: 95%;
-    height: auto;
+    border-radius: 0;
+    padding: var(--gutter);
+    box-shadow: none;
   }
 }
 
