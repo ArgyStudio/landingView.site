@@ -1,0 +1,50 @@
+<!-- File: index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Cash - Crea tu usuario</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="emoji">🎰</div>
+      <h1 class="title">MEGA CASH</h1>
+      <p class="subtitle">
+        <span class="fire">🔥</span>
+        ESCRIBÍ TU NOMBRE Y CREA TU USUARIO
+        <span class="fire">🔥</span>
+      </p>
+      <p class="highlight">RETIROS ILIMITADOS</p>
+      <div class="input-group">
+        <input type="text" placeholder="TU NOMBRE" id="username" />
+      </div>
+      <a href="#" id="ctaButton" class="btn">
+        ¡CREA TU USUARIO! <img src="images/whatsapp-icon.svg" alt="WhatsApp" class="icon" />
+      </a>
+    </div>
+  </div>
+
+  <!-- JS (solo para redirección posterior) -->
+  <script>
+    document.getElementById('ctaButton').addEventListener('click', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('username').value.trim();
+      if (name) {
+        // Redirigir a WhatsApp con el nombre como parámetro de texto
+        const url = `https://wa.me/54911XXXXXXXX?text=Hola%20soy%20${encodeURIComponent(name)}`;
+        window.location.href = url;
+      } else {
+        // agitar input si está vacío
+        document.getElementById('username').classList.add('shake');
+        setTimeout(() => document.getElementById('username').classList.remove('shake'), 500);
+      }
+    });
+  </script>
+</body>
+</html>
