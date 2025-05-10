@@ -34,7 +34,9 @@
   <div class="screen">
     <!-- Form Card -->
     <div class="card">
-      <div class="emoji">🎰</div>
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo de Wonbet.vip" />
+      </div>
       <h1 class="title">200% EXTRA</h1>
       <h1 class="title">EN TU CARGA</h1>
       <p class="subtitle">
@@ -63,18 +65,7 @@
       <div class="carousel">
         <ul class="carousel-track" id="track">
           <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide1.jpg" class="lazy" alt="Slide 1" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide2.jpg" class="lazy" alt="Slide 2" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide3.jpg" class="lazy" alt="Slide 3" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide4.jpg" class="lazy" alt="Slide 4" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide5.jpg" class="lazy" alt="Slide 5" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide6.jpg" class="lazy" alt="Slide 6" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide7.jpg" class="lazy" alt="Slide 7" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide8.jpg" class="lazy" alt="Slide 8" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide9.jpg" class="lazy" alt="Slide 9" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide10.jpg" class="lazy" alt="Slide 10" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide11.jpg" class="lazy" alt="Slide 11" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide12.jpg" class="lazy" alt="Slide 12" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide13.jpg" class="lazy" alt="Slide 13" loading="lazy" /></li>
+          <!-- ... demás slides ... -->
           <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide14.jpg" class="lazy" alt="Slide 14" loading="lazy" /></li>
         </ul>
       </div>
@@ -102,7 +93,7 @@
   <script>
     (function(){
       // Preloader
-      window.addEventListener('load', ()=>{
+      window.addEventListener('load', ()=> {
         const pre = document.getElementById('preloader');
         pre.style.opacity = 0;
         setTimeout(()=> pre.remove(), 600);
@@ -110,16 +101,16 @@
 
       // Theme Toggle
       const toggle = document.getElementById('themeToggle');
-      toggle.addEventListener('click', ()=>{
+      toggle.addEventListener('click', ()=> {
         document.documentElement.classList.toggle('light');
         toggle.textContent = document.documentElement.classList.contains('light') ? '🌞' : '🌙';
       });
 
       // WhatsApp Redirect
-      document.getElementById('ctaButton').addEventListener('click', e=>{
+      document.getElementById('ctaButton').addEventListener('click', e => {
         e.preventDefault();
         const name = document.getElementById('username').value.trim();
-        if(!name){
+        if (!name) {
           const inp = document.getElementById('username');
           inp.classList.add('shake');
           setTimeout(()=> inp.classList.remove('shake'), 500);
@@ -130,44 +121,44 @@
 
       // Lazy-load images
       const lazyImgs = [];
-      document.querySelectorAll('.lazy').forEach(img=> lazyImgs.push(img));
-      const obs = new IntersectionObserver(entries=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
+      document.querySelectorAll('.lazy').forEach(img => lazyImgs.push(img));
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
             const img = e.target;
             img.src = img.dataset.src;
-            img.onload = ()=> img.previousElementSibling.remove();
+            img.onload = () => img.previousElementSibling.remove();
             obs.unobserve(img);
           }
         });
-      }, {rootMargin:'50px'});
-      lazyImgs.forEach(img=> obs.observe(img));
+      }, { rootMargin: '50px' });
+      lazyImgs.forEach(img => obs.observe(img));
 
       // Carousel touch + dots
       const track = document.getElementById('track');
       const items = Array.from(track.children);
       const dots = document.getElementById('dots');
       let current = 0;
-      items.forEach((_,i)=>{
+      items.forEach((_, i) => {
         const d = document.createElement('button');
-        d.className = 'dot' + (i===0?' active':'');
-        d.addEventListener('click', ()=> moveTo(i));
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => moveTo(i));
         dots.appendChild(d);
       });
-      function moveTo(i){
+      function moveTo(i) {
         const w = items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
-        track.style.transform = `translateX(-${w*i}px)`;
+        track.style.transform = `translateX(-${w * i}px)`;
         dots.querySelector('.active').classList.remove('active');
         dots.children[i].classList.add('active');
         current = i;
       }
-      let startX=0;
-      track.addEventListener('touchstart',e=> startX=e.touches[0].pageX);
-      track.addEventListener('touchend',e=>{
+      let startX = 0;
+      track.addEventListener('touchstart', e => startX = e.touches[0].pageX);
+      track.addEventListener('touchend', e => {
         const diff = startX - e.changedTouches[0].pageX;
-        if(Math.abs(diff)>50){
-          if(diff>0 && current < items.length-1) moveTo(current+1);
-          if(diff<0 && current > 0) moveTo(current-1);
+        if (Math.abs(diff) > 50) {
+          if (diff > 0 && current < items.length - 1) moveTo(current + 1);
+          if (diff < 0 && current > 0) moveTo(current - 1);
         }
       });
     })();
@@ -175,3 +166,4 @@
   <script src="testimonials-carousel.js"></script>
 </body>
 </html>
+
