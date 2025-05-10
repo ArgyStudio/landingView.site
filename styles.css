@@ -22,11 +22,7 @@
 
   --screen-aspect: 360/780;
 
-  -logo-width: 80px;
-  --logo-shadow-color: rgba(0, 0, 0, 0.15);
-  --hover-translate: -4px;
-  --animation-duration: 0.6s;
-}
+  }
 
 /*------------------------------------
 2. Impedir scroll de la página
@@ -355,31 +351,8 @@ input[type="text"]:focus {
 
 /*logo*/
 .logo img {
-  width: var(--logo-width);
+  width: 80px;
   height: auto;
   display: block;
   margin: 0 auto;
-  filter: saturate(1);
-  box-shadow: 0 4px 12px var(--logo-shadow-color);
-  border-radius: 8px;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: logo-enter var(--animation-duration) ease-out forwards;
-  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Animación de entrada: escala + fade-in */
-@keyframes logo-enter {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Estado hover/focus: ligera elevación y más saturación */
-.logo img:hover,
-.logo img:focus {
-  transform: translateY(var(--hover-translate)) scale(1.05);
-  filter: saturate(1.2);
-  box-shadow: 0 8px 20px var(--logo-shadow-color);
 }
