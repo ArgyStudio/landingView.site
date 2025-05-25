@@ -3,18 +3,26 @@
 // Testimonios dinámicos y auto-scroll vertical
 (function(){
   const data = [
-    {name: "María P.", city: "Buenos Aires", time: "16:23", text: "¡Excelente experiencia, retiros inmediatos!"},
-    {name: "Lucía G.", city: "Córdoba", time: "09:12", text: "Muy fácil de usar y con gran atención."},
-    {name: "Martín R.", city: "Rosario", time: "20:45", text: "La mejor plataforma de casino móvil."},
-    {name: "Sofía L.", city: "Mendoza", time: "14:05", text: "Los bonos son increíbles, la recomiendo."},
-    {name: "Carlos F.", city: "La Plata", time: "18:30", text: "Interfaz rápida y atractiva."},
-    {name: "Ana T.", city: "Mar del Plata", time: "12:50", text: "¡Gané y retiré mis fondos al instante!"},
-    {name: "Diego V.", city: "Salta", time: "22:10", text: "Soporte 24/7 y promociones diarias."},
-    {name: "Valentina S.", city: "San Juan", time: "11:15", text: "Me encanta la fluidez de la app."},
-    {name: "Javier N.", city: "Paraná", time: "17:05", text: "Lo mejor para jugar desde el celular."},
-    {name: "Julieta C.", city: "Santa Fe", time: "13:40", text: "Pagos seguros y rápidos."}
-    // ... podés agregar más objetos para variabilidad
-  ];
+    {name: "Ezequiel D.", city: "Tucumán", time: "10:28", text: "Vi el anuncio en Instagram y entré por curiosidad, ¡terminé ganando!"},
+    {name: "Camila R.", city: "Neuquén", time: "21:34", text: "El bono del 200% me ayudó a duplicar mis chances. ¡Increíble!"},
+    {name: "Rodrigo M.", city: "Bahía Blanca", time: "19:20", text: "Los cajeros son muy buena onda, te explican todo si tenés dudas."},
+    {name: "Florencia T.", city: "Formosa", time: "08:57", text: "Entré por una historia de Instagram y no me arrepiento. Muy divertido."},
+    {name: "Agustín L.", city: "San Luis", time: "15:46", text: "Los retiros por QR fueron rapidísimos, todo perfecto."},
+    {name: "Milagros J.", city: "Río Gallegos", time: "17:55", text: "Aproveché el 200% y pude jugar más tiempo, ¡vale la pena!"},
+    {name: "Tomás G.", city: "Concordia", time: "11:03", text: "Te atienden con buena onda, es como ir a jugar con amigos."},
+    {name: "Natalia M.", city: "Chaco", time: "20:18", text: "No soy de confiar mucho, pero esta vez me sorprendieron para bien."},
+    {name: "Franco E.", city: "San Rafael", time: "09:42", text: "Me recomendaron esta app y ahora soy yo el que la recomiendo."},
+    {name: "Bianca Z.", city: "Villa María", time: "12:30", text: "Ideal para pasar el rato y ganar algo extra."},
+    {name: "Facundo C.", city: "Catamarca", time: "14:48", text: "La atención al cliente fue excelente, muy amables todos."},
+    {name: "Juliana B.", city: "Misiones", time: "13:17", text: "¡Qué suerte tuve! Entré por Instagram y retiré en la misma tarde."},
+    {name: "Ramiro T.", city: "La Rioja", time: "16:10", text: "El bono inicial te da una gran ventaja para arrancar."},
+    {name: "Micaela A.", city: "Corrientes", time: "18:00", text: "La mejor parte es lo amable que son los que atienden. Da gusto."},
+    {name: "Gonzalo N.", city: "Pergamino", time: "19:45", text: "Entré sin expectativas y terminé recomendándoselo a mis amigos."},
+    {name: "Noelia S.", city: "Trelew", time: "10:05", text: "Me encanta jugar desde la cama y encima gané dos veces."},
+    {name: "Matías I.", city: "Olavarría", time: "22:30", text: "Vi el bono del 200% y no lo dudé. ¡Vale totalmente la pena!"},
+    {name: "Cintia Q.", city: "San Fernando", time: "07:59", text: "El trato fue excelente, te hacen sentir segura y bienvenida."},
+    {name: "Esteban Y.", city: "Esquel", time: "23:12", text: "Muy recomendable, tanto por la app como por la gente detrás."}
+];
 
   const container = document.getElementById('testimonialsCarousel');
   let idx = 0, timer;
