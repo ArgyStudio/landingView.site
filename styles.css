@@ -282,6 +282,12 @@ input[type="text"]:focus {
   background: var(--accent-light);
 }
 
+.carousel-item img {
+  width: 100%;
+  border-radius: calc(var(--radius)/1.3);
+  object-fit: cover;
+}
+
 /*------------------------------------
 8. Testimonials header
 ------------------------------------*/
