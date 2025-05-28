@@ -21,6 +21,12 @@
   --medium: 0.5s;
 
   --screen-aspect: 360/780;
+  
+  /*lo nuevo de escribi tu nombre*/
+    --gutter: 1rem;
+  --primary-color: #4f46e5;
+  --accent-color: #facc15;
+  --glow-color: rgba(250, 204, 21, 0.75);
 
   }
 
@@ -145,7 +151,7 @@ body {
 
 /*------------------------------------
 6. Input & Button
-------------------------------------*/
+-------------ACA VA INPUT-GROUP---------------------*/
 .input-group {
   width: 100%;
   margin-bottom: var(--gutter);
@@ -168,6 +174,34 @@ input[type="text"]:focus {
   box-shadow: 0 0 12px var(--accent-mid);
   transform: translateY(-2px);
 }
+/* ========== Titileo suave del placeholder ========== */
+input[type="text"]::placeholder {
+  /* Color base apagado */
+  color: #999999 !important;
+  /* Iniciamos animación */
+  animation: placeholderBlink 1s ease-in-out infinite !important;
+}
+
+/* Prefijos para compatibilidad */
+input[type="text"]::-webkit-input-placeholder { animation: placeholderBlink 1s ease-in-out infinite !important; }
+input[type="text"]::-moz-placeholder          { animation: placeholderBlink 1s ease-in-out infinite !important; }
+input[type="text"]:-ms-input-placeholder      { animation: placeholderBlink 1s ease-in-out infinite !important; }
+
+@keyframes placeholderBlink {
+  /* 0–50% encendido (glow) */
+  0%, 50% {
+    color: #ffffff;
+    text-shadow:
+      0 0 4px #ffffff,
+      0 0 8px var(--accent-light, #66d9ff);
+  }
+  /* 51–100% apagado */
+  51%, 100% {
+    color: #999999;
+    text-shadow: none;
+  }
+}
+
 .shake {
   animation: shake 0.5s var(--ease);
 }
@@ -239,12 +273,14 @@ input[type="text"]:focus {
   cursor: grabbing;
   animation-play-state: paused;
 }
+
 @keyframes scrollCarousel {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 .carousel-item {
+  /* ⚠️ Fija cada slide al 20% (5 ítems por fila) restando los gaps */
   flex: 0 0 calc((100% - (4 * 0.5rem)) / 5);
   position: relative;
 }
@@ -273,9 +309,11 @@ input[type="text"]:focus {
   margin-top: 0.5rem;
 }
 .dot {
-  width: 0.6rem; height: 0.6rem;
+  width: 0.6rem;
+  height: 0.6rem;
   background: rgba(224,247,255,0.5);
-  border: none; border-radius: 50%;
+  border: none;
+  border-radius: 50%;
   transition: background var(--fast) var(--ease);
 }
 .dot.active {
@@ -328,9 +366,19 @@ input[type="text"]:focus {
   flex-direction: column;
   justify-content: center;
   gap: 0.25rem;
-  color: var(--white);
+  /* quitamos el color global para que hereden por separado */
   font-size: 0.9rem;
   line-height: 1.2;
+}
+
+/* comentario en blanco */
+.testimonial-item p {
+  color: #ffffff;
+}
+
+/* metadatos con el color de acento que ya tenías */
+.testimonial-item .meta {
+  color: var(--accent-light);
 }
 
 .testimonial-item.active {
