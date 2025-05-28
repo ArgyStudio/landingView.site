@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Wonbet.vip – Crea tu usuario</title>
-   <link rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="images/logo-1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/logo-1.png">
 
   <!-- Google Fonts -->
   <link
@@ -15,8 +13,37 @@
     rel="stylesheet"
   />
   <!-- Lottie Player -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <!-- Stylesheet -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+
+  <!-- Estilos inline para preloader y ocultar body -->
+  <style>
+    body {
+      visibility: hidden;
+      margin: 0;
+    }
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    /* Animación del carrusel continuo */
+    .carousel-track {
+      display: flex;
+      gap: 0.5rem;
+      animation: scrollCarousel var(--duration, 28s) linear infinite;
+    }
+    @keyframes scrollCarousel {
+      from { transform: translateX(0); }
+      to   { transform: translateX(var(--scroll-end)); }
+    }
+  </style>
+
+  <!-- Tu CSS principal -->
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Meta Pixel -->
@@ -34,10 +61,13 @@
     );
     fbq('init', PIXEL_ID);
     fbq('track', 'ViewContent');
+    // Desactivar auto-tracking en todo tu sitio
+    fbq('set', 'autoConfig', false, PIXEL_ID);
+
   </script>
 </head>
 <body>
-  <!-- Preloader Overlay -->
+  <!-- Preloader -->
   <div id="preloader">
     <lottie-player
       src="videos/slot-machine.json"
@@ -52,9 +82,8 @@
   <!-- Theme Toggle -->
   <button id="themeToggle" aria-label="Cambiar tema" class="theme-toggle">🌙</button>
 
-  <!-- Screen ÚNICA -->
+  <!-- Pantalla principal -->
   <div class="screen">
-    <!-- Form Card -->
     <div class="card">
       <div class="logo">
         <img src="images/logo.png" alt="Logo de Wonbet.vip" />
@@ -80,43 +109,41 @@
       </a>
     </div>
 
-    <!-- Carousel Section -->
+    <!-- Carousel Continuo -->
     <section class="carousel-section">
       <h2>POPULARES</h2>
       <div class="carousel">
         <ul class="carousel-track" id="track">
-          <!-- items 1–14 -->
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide1.jpg" class="lazy" alt="Slide 1" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide2.jpg" class="lazy" alt="Slide 2" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide3.jpg" class="lazy" alt="Slide 3" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide4.jpg" class="lazy" alt="Slide 4" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide5.jpg" class="lazy" alt="Slide 5" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide6.jpg" class="lazy" alt="Slide 6" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide7.jpg" class="lazy" alt="Slide 7" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide8.jpg" class="lazy" alt="Slide 8" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide9.jpg" class="lazy" alt="Slide 9" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide10.jpg" class="lazy" alt="Slide 10" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide11.jpg" class="lazy" alt="Slide 11" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide12.jpg" class="lazy" alt="Slide 12" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide13.jpg" class="lazy" alt="Slide 13" loading="lazy" /></li>
-          <li class="carousel-item"><div class="skeleton"></div><img data-src="images/slide14.jpg" class="lazy" alt="Slide 14" loading="lazy" /></li>
-
-
+          <!-- slides originales -->
+          <li class="carousel-item"><img src="images/slide1.jpg" alt="Slide 1"></li>
+          <li class="carousel-item"><img src="images/slide2.jpg" alt="Slide 2"></li>
+          <li class="carousel-item"><img src="images/slide3.jpg" alt="Slide 3"></li>
+          <li class="carousel-item"><img src="images/slide4.jpg" alt="Slide 4"></li>
+          <li class="carousel-item"><img src="images/slide5.jpg" alt="Slide 5"></li>
+          <li class="carousel-item"><img src="images/slide6.jpg" alt="Slide 6"></li>
+          <li class="carousel-item"><img src="images/slide7.jpg" alt="Slide 7"></li>
+          <li class="carousel-item"><img src="images/slide8.jpg" alt="Slide 8"></li>
+          <li class="carousel-item"><img src="images/slide9.jpg" alt="Slide 9"></li>
+          <li class="carousel-item"><img src="images/slide10.jpg" alt="Slide 10"></li>
+          <li class="carousel-item"><img src="images/slide11.jpg" alt="Slide 11"></li>
+          <li class="carousel-item"><img src="images/slide12.jpg" alt="Slide 12"></li>
+          <li class="carousel-item"><img src="images/slide13.jpg" alt="Slide 13"></li>
+          <li class="carousel-item"><img src="images/slide14.jpg" alt="Slide 14"></li>
         </ul>
       </div>
       <div class="dots" id="dots"></div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials -->
     <section class="testimonials-section">
       <h2>LO QUE DICEN NUESTROS USUARIOS</h2>
       <div class="testimonials-carousel" id="testimonialsCarousel">
-        <!-- testimonials-carousel.js inyecta los items aquí -->
+        <!-- inyectado por testimonials-carousel.js -->
       </div>
     </section>
   </div>
 
-  <!-- Fallback Mobile Content -->
+  <!-- Contenido fallback -->
   <main class="content">
     <section class="info">
       <h2>¿Por qué Mega Cash?</h2>
@@ -124,155 +151,122 @@
     </section>
   </main>
 
-  <!-- Funciones para Meta Pixel + captura de cookies + envío al API -->
+  <!-- Tu lógica de cookies, CTA y preloader -->
   <script>
-    const API_URL = 'https://jxfyydlcu7.execute-api.us-east-2.amazonaws.com/prod/Capture_fbc';
-    const whatsappNumbers = [
-  '5491125737314',
-  '5491178446299',
-  '5491171836710',
-  '5491169771768',
-  '5491162557202',
-  '5491125730166',
-  '5491178446277',
-  '5491178466845',
-  '5491178467850',
-  '5491171635973',
-  '5491178466905'
-];
-    const mensajeBase = 'Hola vengo por el 200%!';
-
     function parseCookies() {
-      return document.cookie
-        .split('; ')
-        .reduce((c, kv) => {
-          const [name, ...v] = kv.split('=');
-          c[name] = v.join('=');
-          return c;
-        }, {});
+      return document.cookie.split('; ').reduce((acc, kv) => {
+        const [k, ...vals] = kv.split('=');
+        acc[k] = vals.join('=');
+        return acc;
+      }, {});
     }
-
-    function generateUUID() {
-      const bytes = new Uint8Array(16);
-      crypto.getRandomValues(bytes);
-      return Array.from(bytes)
-        .map(b => b.toString(16).padStart(2,'0'))
-        .join('');
-    }
-
     function waitForCookie(name, timeout = 3000) {
       return new Promise(res => {
-        const interval = 100;
-        let waited = 0;
-        const timer = setInterval(() => {
-          if (document.cookie.split('; ').some(c => c.startsWith(name + '=')) || waited >= timeout) {
-            clearInterval(timer);
-            res();
-          }
-          waited += interval;
-        }, interval);
+        const start = Date.now();
+        (function check() {
+          if (
+            document.cookie.split('; ').some(c => c.startsWith(name + '=')) ||
+            Date.now() - start > timeout
+          ) return res();
+          requestAnimationFrame(check);
+        })();
       });
     }
 
-    // Preloader
-    window.addEventListener('load', ()=> {
-      const pre = document.getElementById('preloader');
-      pre.style.opacity = 0;
-      setTimeout(()=> pre.remove(), 600);
+window.addEventListener('load', async () => {
+  // Listener CTA
+  document.getElementById('ctaButton').addEventListener('click', async e => {
+    e.preventDefault();
+    const name = document.getElementById('username').value.trim();
+    if (!name) {
+      const inp = document.getElementById('username');
+      inp.classList.add('shake');
+      return setTimeout(() => inp.classList.remove('shake'), 500);
+    }
+
+    // Ocultar todo excepto el preloader
+    document.body.querySelectorAll('body > *').forEach(el => {
+      if (el.id !== 'preloader') el.style.display = 'none';
     });
 
-    // Theme Toggle
-    const toggle = document.getElementById('themeToggle');
-    toggle.addEventListener('click', ()=> {
-      document.documentElement.classList.toggle('light');
-      toggle.textContent = document.documentElement.classList.contains('light') ? '🌞' : '🌙';
-    });
+    // Esperar las cookies de Facebook
+    await Promise.all([waitForCookie('_fbc'), waitForCookie('_fbp')]);
+    const { _fbc: fbc = null, _fbp: fbp = null } = parseCookies();
 
-    // Lazy-load images
-    const lazyImgs = [];
-    document.querySelectorAll('.lazy').forEach(img => lazyImgs.push(img));
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const img = e.target;
-          img.src = img.dataset.src;
-          img.onload = () => img.previousElementSibling.remove();
-          obs.unobserve(img);
-        }
-      });
-    }, { rootMargin: '50px' });
-    lazyImgs.forEach(img => obs.observe(img));
-
-    // Carousel touch + dots
-    (function(){
-      const track = document.getElementById('track');
-      const items = Array.from(track.children);
-      const dots = document.getElementById('dots');
-      let current = 0;
-      items.forEach((_, i) => {
-        const d = document.createElement('button');
-        d.className = 'dot' + (i === 0 ? ' active' : '');
-        d.addEventListener('click', () => moveTo(i));
-        dots.appendChild(d);
-      });
-      function moveTo(i) {
-        const w = items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
-        track.style.transform = `translateX(-${w * i}px)`;
-        dots.querySelector('.active').classList.remove('active');
-        dots.children[i].classList.add('active');
-        current = i;
-      }
-      let startX = 0;
-      track.addEventListener('touchstart', e => startX = e.touches[0].pageX);
-      track.addEventListener('touchend', e => {
-        const diff = startX - e.changedTouches[0].pageX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0 && current < items.length - 1) moveTo(current + 1);
-          if (diff < 0 && current > 0) moveTo(current - 1);
-        }
-      });
-    })();
-
-    // CTA Button: envío al API y redirección a WhatsApp
-    document.getElementById('ctaButton').addEventListener('click', async e => {
-      e.preventDefault();
-      const name = document.getElementById('username').value.trim();
-      if (!name) {
-        const inp = document.getElementById('username');
-        inp.classList.add('shake');
-        setTimeout(()=> inp.classList.remove('shake'), 500);
-        return;
-      }
-
-      // Generar ID y mensaje
-      const id = generateUUID();
-      const textoCompleto = `${mensajeBase} Mi código promocional es: ${id}%0AEste es mi nombre: ${encodeURIComponent(name)}`;
-
-      // Esperar cookies de Meta Pixel
-      await Promise.all([ waitForCookie('_fbc'), waitForCookie('_fbp') ]);
-
-      // Construir y enviar payload
-      const cookies = parseCookies();
-      const payload = {
-        event:     'ViewContent',
-        timestamp: new Date().toISOString(),
-        _fbc:      cookies._fbc || null,
-        _fbp:      cookies._fbp || null,
-        id
-      };
-      fetch(API_URL, {
+    // Llamada al backend
+    const resp = await fetch(
+      'https://t6cq896p7i.execute-api.us-east-2.amazonaws.com/prod/active-line',
+      {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(()=>{ /* silencio */ })
-        .finally(() => {
-          // Redirección a WhatsApp con número aleatorio
-          const num = whatsappNumbers[Math.floor(Math.random() * whatsappNumbers.length)];
-          window.location.href = `https://wa.me/${num}?text=${textoCompleto}`;
-        });
+        body: JSON.stringify({ subdomain: 'bettroya', fbc, fbp })
+      }
+    );
+    
+    // Extraer número y código promocional
+    const { whatsapp_number: number, uuid } = await resp.json();
+
+    // Enviar evento al pixel ya con uuid definido
+    fbq('trackCustom', 'Click', {
+      fbc,
+      fbp,
+      nombre_usuario: name,
+      uuid,
+      user_agent: navigator.userAgent,
+      dominio: location.hostname,
+      url: location.href,
+      timestamp: Date.now()
     });
 
+    // Construir y redirigir al chat de WhatsApp
+    const msg = `Hola, vengo por la promo del 200% extra! Mi código promocional es ${uuid}
+Este es mi nombre para el usuario: ${name}`;
+
+    window.location.href = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
+  });
+
+
+
+      // Theme toggle
+      const tog = document.getElementById('themeToggle');
+      tog.addEventListener('click', () => {
+        document.documentElement.classList.toggle('light');
+        tog.textContent = document.documentElement.classList.contains('light') ? '🌞' : '🌙';
+      });
+
+      // Quitar preloader y mostrar body
+      const pre = document.getElementById('preloader');
+      pre.style.transition = 'opacity 0.5s ease';
+      pre.style.opacity = '0';
+      setTimeout(() => pre.remove(), 500);
+      document.body.style.visibility = 'visible';
+    });
   </script>
-  <script src="testimonials-carousel.js"></script>
+
+  <!-- Carrusel continuo -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const track      = document.getElementById('track');
+      const carousel   = document.querySelector('.carousel');
+      const slides     = Array.from(track.children);
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const trackGap   = parseFloat(getComputedStyle(track).gap);
+
+      const visibleCount = Math.ceil(
+        carousel.clientWidth / (slideWidth + trackGap)
+      ) + 1;
+
+      for (let i = 0; i < visibleCount; i++) {
+        const clone = slides[i % slides.length].cloneNode(true);
+        track.appendChild(clone);
+      }
+
+      const originalWidth = slides.length * (slideWidth + trackGap);
+      track.style.setProperty('--scroll-end', `-${originalWidth}px`);
+      track.style.setProperty('--duration', `${slides.length * 2}s`);
+      track.style.animation = `scrollCarousel var(--duration) linear infinite`;
+    });
+  </script>
+  <script src="testimonials-carousel.js" defer></script>
 </body>
 </html>
