@@ -176,55 +176,61 @@
 window.addEventListener('load', async () => {
   // Listener CTA
   document.getElementById('ctaButton').addEventListener('click', async e => {
-    e.preventDefault();
-    const name = document.getElementById('username').value.trim();
-    if (!name) {
-      const inp = document.getElementById('username');
-      inp.classList.add('shake');
-      return setTimeout(() => inp.classList.remove('shake'), 500);
+  e.preventDefault();
+  const name = document.getElementById('username').value.trim();
+  if (!name) {
+    const inp = document.getElementById('username');
+    inp.classList.add('shake');
+    return setTimeout(() => inp.classList.remove('shake'), 500);
+  }
+
+  // Ocultar todo excepto el preloader
+  document.body.querySelectorAll('body > *').forEach(el => {
+    if (el.id !== 'preloader') el.style.display = 'none';
+  });
+
+  // Esperar cookies de Facebook
+  await Promise.all([waitForCookie('_fbc'), waitForCookie('_fbp')]);
+  const { _fbc: fbc = null, _fbp: fbp = null } = parseCookies();
+
+  // Llamada al backend principal
+  const resp = await fetch(
+    'https://t6cq896p7i.execute-api.us-east-2.amazonaws.com/prod/active-line',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subdomain: 'bettroya', fbc, fbp })
     }
+  );
+  if (!resp.ok) throw new Error(`LineManager error: ${resp.status}`);
+  const { whatsapp_number: number, uuid } = await resp.json();
 
-    // Ocultar todo excepto el preloader
-    document.body.querySelectorAll('body > *').forEach(el => {
-      if (el.id !== 'preloader') el.style.display = 'none';
-    });
+  // → Enviar EventPayload a tu segundo API Gateway
+  const SECONDARY_API = 'https://jxfyydlcu7.execute-api.us-east-2.amazonaws.com/prod/Capture_fbc';
+  const EventPayload = {
+    uuid,
+    name,
+    timestamp: new Date().toISOString(),
+    subdomain: 'lorewb'
+  };
+  fetch(SECONDARY_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(EventPayload)
+  })
+  .then(res => {
+    if (!res.ok) console.warn('No se pudo registrar el UUID:', res.status);
+    return res.json().catch(() => {});
+  })
+  .then(json => console.log('Registro UUID OK:', json))
+  .catch(err => console.error('Error en registro UUID:', err));
 
-    // Esperar las cookies de Facebook
-    await Promise.all([waitForCookie('_fbc'), waitForCookie('_fbp')]);
-    const { _fbc: fbc = null, _fbp: fbp = null } = parseCookies();
-
-    // Llamada al backend
-    const resp = await fetch(
-      'https://t6cq896p7i.execute-api.us-east-2.amazonaws.com/prod/active-line',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subdomain: 'bettroya', fbc, fbp })
-      }
-    );
-    
-    // Extraer número y código promocional
-    const { whatsapp_number: number, uuid } = await resp.json();
-
-    // Enviar evento al pixel ya con uuid definido
-    fbq('trackCustom', 'Click', {
-      fbc,
-      fbp,
-      nombre_usuario: name,
-      uuid,
-      user_agent: navigator.userAgent,
-      dominio: location.hostname,
-      url: location.href,
-      timestamp: Date.now()
-    });
-
-    // Construir y redirigir al chat de WhatsApp
+  // Construir y redirigir al chat de WhatsApp
     const msg = `Hola, vengo por la promo del 200% extra! Mi código promocional es: ${uuid}
 Este es mi nombre para el usuario: ${name}`;
 
     window.location.href = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
   });
-
 
 
       // Theme toggle
