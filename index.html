@@ -227,7 +227,7 @@ window.addEventListener('load', async () => {
 
   // Construir y redirigir al chat de WhatsApp
     const msg = `Hola, vengo por la promo del 200% extra! Mi código promocional es: ${uuid}
-Este es mi nombre para el usuario: ${name}`;
+    Este es mi nombre para el usuario: ${name}`;
 
     window.location.href = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
   });
